@@ -1,37 +1,13 @@
-import { CalculatorState, EvaluateOperator, OPERATORS, Operator } from './types';
+import { expressionIsOnlyEvaluation } from './helpers/evaluate-state';
+import { isNumber, isOperator } from './helpers/evaluate-types';
+import { CalculatorState, Operator } from './types';
 
 export function calculate(state: CalculatorState, expression: string): CalculatorState {
-  // if only given =, perform the last operation again
-
-  if (expression === EvaluateOperator && state.operand && state.operator) {
-    const left = `${state.value}`;
-    const right = `${state.operand}`;
-    const { operator } = state;
-
-    const value = performCalculation({ left, right, operator });
-
-    return {
-      value,
-      operand: parseFloat(right),
-      operator,
-    };
+  if (expressionIsOnlyEvaluation({ state, expression })) {
+    return performEvaluationOnly({ state, expression });
   }
-  let left = '';
-  let right = '';
-  let operator: Operator | undefined = undefined;
 
-  // build up expression parts
-  for (let i = 0; i < expression.length; i++) {
-    const part = expression[i];
-
-    if (isNumber(part) && !operator) {
-      left += part;
-    } else if (isNumber(part) && operator) {
-      right += part;
-    } else if (isOperator(part)) {
-      operator = part;
-    }
-  }
+  const { left, right, operator } = breakDownExpression(expression);
 
   if (!operator) {
     return {
@@ -48,12 +24,24 @@ export function calculate(state: CalculatorState, expression: string): Calculato
   };
 }
 
-function isNumber(a: string) {
-  return !isNaN(+a);
-}
+function breakDownExpression(expression: string) {
+  let left = '';
+  let right = '';
+  let operator: Operator | undefined = undefined;
 
-function isOperator(a: string): a is Operator {
-  return OPERATORS.includes(a as Operator);
+  for (let i = 0; i < expression.length; i++) {
+    const part = expression[i];
+
+    if (isNumber(part) && !operator) {
+      left += part;
+    } else if (isNumber(part) && operator) {
+      right += part;
+    } else if (isOperator(part)) {
+      operator = part;
+    }
+  }
+
+  return { left, right, operator };
 }
 
 function performCalculation({
@@ -82,4 +70,27 @@ function performCalculation({
   }
 
   return 0;
+}
+
+function performEvaluationOnly({
+  state,
+}: {
+  state: CalculatorState;
+  expression: string;
+}): CalculatorState {
+  const left = `${state.value}`;
+  const right = `${state.operand}`;
+  const { operator } = state;
+
+  if (!operator) {
+    throw new Error('unexpected state: operator is not defined');
+  }
+
+  const value = performCalculation({ left, right, operator });
+
+  return {
+    value,
+    operand: parseFloat(right),
+    operator,
+  };
 }
