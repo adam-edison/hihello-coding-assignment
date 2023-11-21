@@ -17,4 +17,4 @@ export const OPERATORS = ['+', '-', '*', '/'] as const;
 export type OperatorTuple = typeof OPERATORS;
 export type Operator = OperatorTuple[number];
 
-export type EvaluateOperator = '=';
+export const EvaluateOperator = '=';

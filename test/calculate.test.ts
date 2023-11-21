@@ -51,6 +51,12 @@ const testCases: TestCase[] = [
     expression: '2/4=',
     expected: { value: 0.5, operator: '/', operand: 4 },
   },
+  {
+    name: 'expression is just =',
+    state: { value: 5, operand: 3, operator: '-' },
+    expression: '=',
+    expected: { value: 2, operator: '-', operand: 3 },
+  },
 ];
 
 describe('calculate function', () => {

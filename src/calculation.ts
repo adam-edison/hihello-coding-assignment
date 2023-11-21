@@ -1,9 +1,21 @@
-import { CalculatorState, OPERATORS, Operator } from './types';
+import { CalculatorState, EvaluateOperator, OPERATORS, Operator } from './types';
 
 export function calculate(state: CalculatorState, expression: string): CalculatorState {
-  const operands: number[] = []; // stores numbers to operate on
-  const operators: Operator[] = [];
+  // if only given =, perform the last operation again
 
+  if (expression === EvaluateOperator && state.operand && state.operator) {
+    const left = `${state.value}`;
+    const right = `${state.operand}`;
+    const { operator } = state;
+
+    const value = performCalculation({ left, right, operator });
+
+    return {
+      value,
+      operand: parseFloat(right),
+      operator,
+    };
+  }
   let left = '';
   let right = '';
   let operator: Operator | undefined = undefined;
