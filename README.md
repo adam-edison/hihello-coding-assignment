@@ -1,5 +1,6 @@
 # hihello-coding-assignment
-HiHello Coding Assignment - Server using TypeScript
+HiHello Coding Assignment - Server
+CLI Calculator using TypeScript
 
 
 Start Time: 7:50 pm ET
