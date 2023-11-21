@@ -8,7 +8,7 @@ CLI Calculator using TypeScript
 1. Perform setup with `npm install`
 2. Then, to run the application, run `npm start`
 
-NOTE: The application can be exited by typing `q` or `exit` and hitting enter
+NOTE: The application can be exited by typing `exit` and hitting enter
 
 ## Running Tests
 
@@ -51,6 +51,7 @@ Tested on WSL2 with:
 #### Items Not Yet Completed
 
 - Not yet completed: (time estimates)
+
   - negative numbers input using `!` (5 min)
   - clear button as `c` (5 min)
   - add-on operations, e.g. `+5=` (10 min)
@@ -59,3 +60,9 @@ Tested on WSL2 with:
   - edge cases with large numbers, e.g. overflow MAX_INTEGER value (5 min)
   - edge cases with negative numbers (5 min)
   - edge case with dividing by zero (5 min)
+
+- Bugs
+  - decimal math is not supported, yet
+    - fix: include in the regex, and process `.` in calculation to add to `left`/`right` before number parsing
+  - cannot exit with `q`
+    - fix: include in the regex
