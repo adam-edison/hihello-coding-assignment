@@ -57,5 +57,17 @@ function performCalculation({
     return parseFloat(left) + parseFloat(right);
   }
 
+  if (operator === '-') {
+    return parseFloat(left) - parseFloat(right);
+  }
+
+  if (operator === '*') {
+    return parseFloat(left) * parseFloat(right);
+  }
+
+  if (operator === '/') {
+    return parseFloat(left) / parseFloat(right);
+  }
+
   return 0;
 }

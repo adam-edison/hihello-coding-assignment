@@ -33,6 +33,24 @@ const testCases: TestCase[] = [
     expression: '2+3=',
     expected: { value: 5, operator: '+', operand: 3 },
   },
+  {
+    name: 'single digit subtraction',
+    state: { value: 0 },
+    expression: '2-3=',
+    expected: { value: -1, operator: '-', operand: 3 },
+  },
+  {
+    name: 'single digit multiplication',
+    state: { value: 0 },
+    expression: '2*4=',
+    expected: { value: 8, operator: '*', operand: 4 },
+  },
+  {
+    name: 'single digit division',
+    state: { value: 0 },
+    expression: '2/4=',
+    expected: { value: 0.5, operator: '/', operand: 4 },
+  },
 ];
 
 describe('calculate function', () => {
