@@ -14,7 +14,10 @@ function shouldExit(expression: string) {
 do {
   output(`${state.value}`);
 
-  const input = question('> ', { limit: /^([0-9+=]+)|exit$/ });
+  const input = question('> ', {
+    limit: /^([0-9+=]+)|exit$/,
+    limitMessage: 'Invalid numeric expression',
+  });
   expression = input.trim();
 
   state = calculate(state, expression);
