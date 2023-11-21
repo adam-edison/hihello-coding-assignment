@@ -1,7 +1,14 @@
 import { calculate } from '../src/calculation';
 import { CalculatorState } from '../src/types';
 
-const testCases = [
+interface TestCase {
+  name: string;
+  state: CalculatorState;
+  expression: string;
+  expected: CalculatorState;
+}
+
+const testCases: TestCase[] = [
   {
     name: 'clean value single digit will overwrite stored value',
     state: { value: 0 },
@@ -13,6 +20,18 @@ const testCases = [
     state: { value: 0 },
     expression: '23456',
     expected: { value: 23456 },
+  },
+  {
+    name: 'clean value multiple digits will overwrite stored value',
+    state: { value: 0 },
+    expression: '23456',
+    expected: { value: 23456 },
+  },
+  {
+    name: 'single digit addition',
+    state: { value: 0 },
+    expression: '2+3=',
+    expected: { value: 5, operator: '+', operand: 3 },
   },
 ];
 

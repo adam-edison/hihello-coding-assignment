@@ -13,6 +13,9 @@ function shouldExit(expression: string) {
 
 do {
   output(`${state.value}`);
-  expression = question('Numbers only (or q to exit) \n> ', { limit: /^([0-9]+)|exit$/ });
+
+  const input = question('> ', { limit: /^([0-9+=]+)|exit$/ });
+  expression = input.trim();
+
   state = calculate(state, expression);
 } while (!shouldExit(expression));
