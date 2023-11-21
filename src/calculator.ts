@@ -1,6 +1,6 @@
-export function calculate() {
-  return 0;
-}
+import { question } from 'readline-sync';
+import { output } from './output';
 
-// eslint-disable-next-line no-console
-console.log('Hello, world!', calculate());
+const answer = question('Numbers only \n> ', { limit: /^[0-9]+$/ });
+
+output(`You gave me "${answer}"`);

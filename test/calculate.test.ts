@@ -1,10 +1,8 @@
-import { calculate } from '../src/calculator';
+import { calculate } from '../src/calculation';
 
 describe('calculate function', () => {
-  describe('when server is running', () => {
-    test('returns 0', () => {
-      const result = calculate();
-      expect(result).toEqual(0);
-    });
+  test('returns 0', () => {
+    const result = calculate();
+    expect(result).toEqual(0);
   });
 });
